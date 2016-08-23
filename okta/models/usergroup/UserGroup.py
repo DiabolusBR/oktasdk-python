@@ -4,36 +4,45 @@ from okta.models.Link import Link
 
 class UserGroup:
 
-    types = {
-        'id': str,
-        'objectClass': str,
-        'profile': UserGroupProfile
-    }
+	types = {
+		'id': str,
+		'objectClass': str,
+		'profile': UserGroupProfile,
+		'created': str,
+		'lastMembershipUpdated': str,
+		'lastUpdated': str
+	}
 
-    dict_types = {
-        '_links': Link
-    }
+	dict_types = {
+		'_links': Link
+	}
 
-    alt_names = {
-        '_links': 'links'
-    }
+	alt_names = {
+		'_links': 'links'
+	}
 
-    def __init__(self, **kwargs):
+	def __init__(self, **kwargs):
 
-        # unique key for group
-        self.id = None  # str
+		# unique key for group
+		self.id = None  # str
 
-        # determines the groups profile
-        self.objectClass = None  # enum
+		# determines the groups profile
+		self.objectClass = None  # enum
 
-        # the groups profile attributes
-        self.profile = None  # UserGroupProfile
+		# the groups profile attributes
+		self.profile = None  # UserGroupProfile
 
-        self.links = None
+		self.links = None
+		
+		self.created = None
+		
+		self.lastMembershipUpdated = None
+		
+		self.lastUpdated = None
 
-        # Populate profile
-        profile_attrs = ['name', 'description']
-        for attr in profile_attrs:
-            if attr in kwargs:
-                self.profile = self.profile or UserGroupProfile()
-                setattr(self.profile, attr, kwargs[attr])
+		# Populate profile
+		profile_attrs = ['name', 'description']
+		for attr in profile_attrs:
+			if attr in kwargs:
+				self.profile = self.profile or UserGroupProfile()
+				setattr(self.profile, attr, kwargs[attr])
